@@ -476,7 +476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481055938}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.078024045, z: 0, w: 0.99695146}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -484,7 +484,7 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 968028843}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 8.95, z: 0}
 --- !u!1 &565608585
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 968028842}
   - component: {fileID: 968028841}
   - component: {fileID: 968028840}
+  - component: {fileID: 968028844}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -860,6 +861,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968028844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968028839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1337cec1d46f4448644973d91f7d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewPoint: {fileID: 0}
+  mouseSensitivity: 1
+  verticalRotationStore: 0
 --- !u!1 &1238596905
 GameObject:
   m_ObjectHideFlags: 0
