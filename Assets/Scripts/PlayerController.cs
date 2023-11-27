@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalRotationStore;
     [SerializeField] private bool invertLook;
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private CharacterController CharCom;
     private Vector3 moveDir, movement;
     private Vector2 mouseInput;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         viewPoint = this.transform.GetChild(1).gameObject;
+        CharCom = this.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -37,6 +39,6 @@ public class PlayerController : MonoBehaviour
 
         moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized;
-        this.transform.position += movement * moveSpeed * Time.deltaTime;
+        CharCom.Move(movement * moveSpeed * Time.deltaTime);
     }
 }
