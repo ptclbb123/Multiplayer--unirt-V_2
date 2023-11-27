@@ -863,7 +863,7 @@ MonoBehaviour:
   verticalRotationStore: 0
   invertLook: 0
   moveSpeed: 5
-  runSpeed: 5
+  runSpeed: 8
   CharCom: {fileID: 0}
 --- !u!143 &968028845
 CharacterController:
