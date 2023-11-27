@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] private CharacterController CharCom;
+    [SerializeField] private float jumpForce = 12f;
+    [SerializeField] private float gravityMod = 2.5f;
+    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private LayerMask groundLayer;
+
+    private bool isGrounded;
 
     private float activeMoveSpeed;
     private Vector3 moveDir, movement;
@@ -49,12 +55,19 @@ public class PlayerController : MonoBehaviour
 
         float yVel = movement.y;
         movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized * activeMoveSpeed;
-
-        if (!CharCom.isGrounded)
+        movement.y = yVel;
+        if (CharCom.isGrounded)
         {
-            movement.y = yVel;
+            movement.y = 0; ;
         }
-        movement.y = Physics.gravity.y * Time.deltaTime;
+
+        isGrounded = Physics.Raycast(groundCheckPoint.position, Vector3.down, 0.25f, groundLayer);
+        if (Input.GetButtonDown("Junp") && isGrounded)
+        {
+            movement.y = jumpForce;
+        }
+
+        movement.y = Physics.gravity.y * Time.deltaTime * gravityMod;
         CharCom.Move(movement * Time.deltaTime);
     }
 
