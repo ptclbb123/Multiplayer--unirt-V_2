@@ -9,9 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalRotationStore;
     [SerializeField] private bool invertLook;
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float runSpeed = 8f;
     [SerializeField] private CharacterController CharCom;
+
+    private float activeMoveSpeed;
     private Vector3 moveDir, movement;
     private Vector2 mouseInput;
+    private Camera cam;
 
     // Start is called before the first frame update
     private void Start()
@@ -19,6 +23,8 @@ public class PlayerController : MonoBehaviour
         viewPoint = this.transform.GetChild(1).gameObject;
         CharCom = this.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -38,7 +44,23 @@ public class PlayerController : MonoBehaviour
         }
 
         moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized;
-        CharCom.Move(movement * moveSpeed * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.LeftShift)) { activeMoveSpeed = runSpeed; }
+        else { activeMoveSpeed = moveSpeed; }
+
+        float yVel = movement.y;
+        movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized * activeMoveSpeed;
+
+        if (!CharCom.isGrounded)
+        {
+            movement.y = yVel;
+        }
+        movement.y = Physics.gravity.y * Time.deltaTime;
+        CharCom.Move(movement * Time.deltaTime);
+    }
+
+    private void LateUpdate()
+    {
+        cam.transform.position = viewPoint.transform.position;
+        cam.transform.rotation = viewPoint.transform.rotation;
     }
 }
